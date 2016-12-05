@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-12-05 21:50:17 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.Faktura" table="faktura" catalog="sbd_db" optimistic-lock="version">
+        <id name="idFaktura" type="java.lang.Integer">
+            <column name="Id_faktura" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="zamowienie" class="model.Zamowienie" fetch="select">
+            <column name="Zamowienie_nr" unique="true" />
+        </many-to-one>
+        <property name="wartoscNetto" type="float">
+            <column name="Wartosc_netto" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="wartoscBrutto" type="float">
+            <column name="Wartosc_brutto" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="wartoscVat" type="float">
+            <column name="Wartosc_VAT" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="terminZaplaty" type="date">
+            <column name="Termin_zaplaty" length="10" not-null="true" />
+        </property>
+        <property name="formaPlatnosci" type="string">
+            <column name="Forma_platnosci" length="20" not-null="true" />
+        </property>
+        <property name="dataSprzedazy" type="date">
+            <column name="Data_sprzedazy" length="10" not-null="true" />
+        </property>
+        <set name="pozycjaFakturies" table="pozycja_faktury" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Faktura_id" />
+            </key>
+            <one-to-many class="model.PozycjaFaktury" />
+        </set>
+    </class>
+</hibernate-mapping>

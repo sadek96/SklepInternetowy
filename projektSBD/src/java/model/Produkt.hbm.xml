@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-12-05 21:50:17 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.Produkt" table="produkt" catalog="sbd_db" optimistic-lock="version">
+        <id name="idProdukt" type="java.lang.Integer">
+            <column name="Id_produkt" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="kategoriaProducent" class="model.KategoriaProducent" fetch="select">
+            <column name="Kategoria_producent" />
+        </many-to-one>
+        <property name="nazwa" type="string">
+            <column name="Nazwa" length="25" not-null="true" />
+        </property>
+        <property name="opis" type="string">
+            <column name="Opis" length="300" not-null="true" />
+        </property>
+        <property name="cenaNettoAktualna" type="float">
+            <column name="Cena_netto_aktualna" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="cenaBruttoAktualna" type="float">
+            <column name="Cena_brutto_aktualna" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="procentVat" type="float">
+            <column name="Procent_VAT" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="ilosc" type="int">
+            <column name="Ilosc" not-null="true" />
+        </property>
+        <set name="pozycjaFakturies" table="pozycja_faktury" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Produkt_id" />
+            </key>
+            <one-to-many class="model.PozycjaFaktury" />
+        </set>
+        <set name="zamowienieProdukts" table="zamowienie_produkt" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Produkt_id" />
+            </key>
+            <one-to-many class="model.ZamowienieProdukt" />
+        </set>
+        <set name="opinias" table="opinia" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Produkt_id" />
+            </key>
+            <one-to-many class="model.Opinia" />
+        </set>
+        <set name="zdjecies" table="zdjecie" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Produkt_id" />
+            </key>
+            <one-to-many class="model.Zdjecie" />
+        </set>
+    </class>
+</hibernate-mapping>

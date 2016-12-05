@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-12-05 21:50:17 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.Producent" table="producent" catalog="sbd_db" optimistic-lock="version">
+        <id name="idProducent" type="java.lang.Integer">
+            <column name="Id_producent" />
+            <generator class="identity" />
+        </id>
+        <property name="nazwaProducenta" type="string">
+            <column name="Nazwa_producenta" length="25" not-null="true" unique="true" />
+        </property>
+        <set name="kategoriaProducents" table="kategoria_producent" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Producent_id" />
+            </key>
+            <one-to-many class="model.KategoriaProducent" />
+        </set>
+    </class>
+</hibernate-mapping>

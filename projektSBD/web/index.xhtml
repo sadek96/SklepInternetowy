@@ -9,10 +9,10 @@
     <h:body>
 
 
-            <h:outputLabel value="#{kategoriaController.nazwa}"/> 
+            <h:outputLabel value="#{kategoriaDao.nazwa}"/> 
 
         <h:form>
-            <h:commandButton action="#{kategoriaController.dodajKategoria()}" label="DodajKategorię"/>
+            <h:commandButton action="#{kategoriaDao.dodajKategoria()}" label="DodajKategorię"/>
         </h:form>
     </h:body>
 </html>

@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-12-05 21:50:17 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.Klient" table="klient" catalog="sbd_db" optimistic-lock="version">
+        <id name="idKlient" type="java.lang.Integer">
+            <column name="Id_klient" />
+            <generator class="identity" />
+        </id>
+        <property name="imie" type="string">
+            <column name="Imie" length="25" />
+        </property>
+        <property name="nazwisko" type="string">
+            <column name="Nazwisko" length="25" />
+        </property>
+        <property name="login" type="string">
+            <column name="Login" length="50" not-null="true" />
+        </property>
+        <property name="haslo" type="string">
+            <column name="Haslo" length="50" not-null="true" />
+        </property>
+        <property name="nazwaFirmy" type="string">
+            <column name="Nazwa_firmy" length="50" />
+        </property>
+        <property name="EMail" type="string">
+            <column name="E_mail" length="50" not-null="true" />
+        </property>
+        <property name="nrTelefonu" type="string">
+            <column name="Nr_telefonu" length="15" not-null="true" />
+        </property>
+        <set name="adreses" table="adres" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Klient_id" />
+            </key>
+            <one-to-many class="model.Adres" />
+        </set>
+        <set name="zamowienies" table="zamowienie" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Klient_id" />
+            </key>
+            <one-to-many class="model.Zamowienie" />
+        </set>
+    </class>
+</hibernate-mapping>

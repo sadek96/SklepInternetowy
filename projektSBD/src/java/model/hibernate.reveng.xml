@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.sourceforge.net/hibernate-reverse-engineering-3.0.dtd">
+<hibernate-reverse-engineering>
+  <schema-selection match-catalog="sbd_db"/>
+  <table-filter match-name="zamowienie_produkt"/>
+  <table-filter match-name="zamowienie_dostawca"/>
+  <table-filter match-name="zamowienie"/>
+  <table-filter match-name="pozycja_faktury"/>
+  <table-filter match-name="faktura"/>
+  <table-filter match-name="dostawca"/>
+  <table-filter match-name="zdjecie"/>
+  <table-filter match-name="adres"/>
+  <table-filter match-name="producent"/>
+  <table-filter match-name="opinia"/>
+  <table-filter match-name="klient"/>
+  <table-filter match-name="kategoria_producent"/>
+  <table-filter match-name="produkt"/>
+  <table-filter match-name="kategoria"/>
+</hibernate-reverse-engineering>

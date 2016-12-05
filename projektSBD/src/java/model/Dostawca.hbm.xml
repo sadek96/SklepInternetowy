@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-12-05 21:50:17 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.Dostawca" table="dostawca" catalog="sbd_db" optimistic-lock="version">
+        <id name="idDostawca" type="java.lang.Integer">
+            <column name="Id_dostawca" />
+            <generator class="identity" />
+        </id>
+        <property name="nazwa" type="string">
+            <column name="Nazwa" length="25" not-null="true" />
+        </property>
+        <property name="nip" type="string">
+            <column name="NIP" length="13" not-null="true" />
+        </property>
+        <property name="regon" type="string">
+            <column name="REGON" length="14" not-null="true" />
+        </property>
+        <property name="cena" type="float">
+            <column name="Cena" precision="12" scale="0" not-null="true" />
+        </property>
+        <property name="czasDostawy" type="string">
+            <column name="Czas_dostawy" length="3" not-null="true" />
+        </property>
+        <set name="zamowienieDostawcas" table="zamowienie_dostawca" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Dostawca_id" />
+            </key>
+            <one-to-many class="model.ZamowienieDostawca" />
+        </set>
+    </class>
+</hibernate-mapping>

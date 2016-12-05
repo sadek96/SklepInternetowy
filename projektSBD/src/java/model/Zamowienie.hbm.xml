@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-12-05 21:50:17 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.Zamowienie" table="zamowienie" catalog="sbd_db" optimistic-lock="version">
+        <id name="nrZamowienia" type="java.lang.Integer">
+            <column name="Nr_zamowienia" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="adres" class="model.Adres" fetch="select">
+            <column name="Adres_wysyłki" not-null="true" />
+        </many-to-one>
+        <many-to-one name="klient" class="model.Klient" fetch="select">
+            <column name="Klient_id" />
+        </many-to-one>
+        <property name="dataZlozenia" type="date">
+            <column name="Data_zlozenia" length="10" not-null="true" />
+        </property>
+        <property name="dataPrzyjecia" type="date">
+            <column name="Data_przyjecia" length="10" />
+        </property>
+        <property name="dataWysylki" type="date">
+            <column name="Data_wysylki" length="10" />
+        </property>
+        <property name="stanZamowienia" type="string">
+            <column name="Stan_zamowienia" length="25" not-null="true" />
+        </property>
+        <set name="zamowienieProdukts" table="zamowienie_produkt" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Zamowienie_id" />
+            </key>
+            <one-to-many class="model.ZamowienieProdukt" />
+        </set>
+        <set name="zamowienieDostawcas" table="zamowienie_dostawca" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Zamowienie_id" />
+            </key>
+            <one-to-many class="model.ZamowienieDostawca" />
+        </set>
+        <set name="fakturas" table="faktura" inverse="true" lazy="true" fetch="select">
+            <key>
+                <column name="Zamowienie_nr" unique="true" />
+            </key>
+            <one-to-many class="model.Faktura" />
+        </set>
+    </class>
+</hibernate-mapping>

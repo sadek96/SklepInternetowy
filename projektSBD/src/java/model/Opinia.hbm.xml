@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-12-05 21:50:17 by Hibernate Tools 4.3.1 -->
+<hibernate-mapping>
+    <class name="model.Opinia" table="opinia" catalog="sbd_db" optimistic-lock="version">
+        <id name="idOpinia" type="java.lang.Integer">
+            <column name="Id_opinia" />
+            <generator class="identity" />
+        </id>
+        <many-to-one name="produkt" class="model.Produkt" fetch="select">
+            <column name="Produkt_id" />
+        </many-to-one>
+        <property name="tresc" type="string">
+            <column name="Tresc" length="300" not-null="true" />
+        </property>
+        <property name="nazwaUzytkownika" type="string">
+            <column name="Nazwa_uzytkownika" length="25" not-null="true" />
+        </property>
+        <property name="dataWystawienia" type="date">
+            <column name="Data_wystawienia" length="10" not-null="true" />
+        </property>
+        <property name="ocena" type="byte">
+            <column name="Ocena" not-null="true" check="ocena in {1,2,3,4,5}" />
+        </property>
+    </class>
+</hibernate-mapping>

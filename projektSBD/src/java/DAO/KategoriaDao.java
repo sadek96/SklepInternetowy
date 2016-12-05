@@ -8,8 +8,9 @@ package DAO;
 import javax.faces.bean.ManagedBean;
 import javax.faces.bean.RequestScoped;
 import javax.faces.bean.SessionScoped;
-import org.hibernate.exception.ConstraintViolationException;
 import model.Kategoria;
+import org.hibernate.exception.ConstraintViolationException;
+
 import org.hibernate.Session;
 import util.HibernateUtil;
 
@@ -19,7 +20,7 @@ import util.HibernateUtil;
  */
 @ManagedBean
 @SessionScoped
-public class KategoriaController {
+public class KategoriaDao {
 
     private Kategoria kategoria;
     private HibernateUtil helper;
@@ -31,7 +32,7 @@ public class KategoriaController {
         session.beginTransaction();
         try {
             kategoria = (Kategoria) session.get(Kategoria.class, 2);
-            this.nazwa = kategoria.getNazwa();
+            this.nazwa = kategoria.getNazwaKategorii();
         } catch (Exception e) {
             this.nazwa = "NULL";
         } finally {
@@ -41,7 +42,8 @@ public class KategoriaController {
     }
 
     public void dodajKategoria() {
-        kategoria = new Kategoria("Komputery Osobiste");
+        kategoria = new Kategoria();
+        kategoria.setNazwaKategorii("Komputer osobisty");
         session = helper.getSessionFactory().openSession();
         try {
             session.beginTransaction();

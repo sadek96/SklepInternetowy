@@ -7,6 +7,20 @@
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/sbd_db?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
     <property name="hibernate.connection.password">Danieel_7siedem</property>
-    <mapping resource="hibernate.hbm.xml"/>
+    <mapping resource="model/kategoria.hbm.xml"/>
+    <mapping resource="model/Producent.hbm.xml"/>
+    <mapping resource="model/Kategoria.hbm.xml"/>
+    <mapping resource="model/KategoriaProducent.hbm.xml"/>
+    <mapping resource="model/Zamowienie.hbm.xml"/>
+    <mapping resource="model/Adres.hbm.xml"/>
+    <mapping resource="model/Klient.hbm.xml"/>
+    <mapping resource="model/Dostawca.hbm.xml"/>
+    <mapping resource="model/ZamowienieDostawca.hbm.xml"/>
+    <mapping resource="model/Zdjecie.hbm.xml"/>
+    <mapping resource="model/Produkt.hbm.xml"/>
+    <mapping resource="model/PozycjaFaktury.hbm.xml"/>
+    <mapping resource="model/Opinia.hbm.xml"/>
+    <mapping resource="model/Faktura.hbm.xml"/>
+    <mapping resource="model/ZamowienieProdukt.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
