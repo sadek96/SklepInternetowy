@@ -11,9 +11,9 @@
         <many-to-one name="faktura" class="model.Faktura" fetch="select">
             <column name="Faktura_id" />
         </many-to-one>
-        <one-to-one name="produkt" class="model.Produkt" fetch="select">
+        <many-to-one name="produkt" class="model.Produkt" fetch="select">
             <column name="Produkt_id" />
-        </one-to-one>
+        </many-to-one>
         <property name="cenaNettoSprzedazy" type="float">
             <column name="Cena_netto_sprzedazy" precision="12" scale="0" not-null="true" />
         </property>
