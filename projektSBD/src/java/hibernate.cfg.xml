@@ -6,7 +6,7 @@
     <property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
     <property name="hibernate.connection.url">jdbc:mysql://localhost:3306/sbd_db?zeroDateTimeBehavior=convertToNull</property>
     <property name="hibernate.connection.username">root</property>
-    <property name="hibernate.connection.password">Danieel_7siedem</property>
+    <property name="hibernate.connection.password">root</property>
     <mapping resource="model/Producent.hbm.xml"/>
     <mapping resource="model/Kategoria.hbm.xml"/>
     <mapping resource="model/KategoriaProducent.hbm.xml"/>

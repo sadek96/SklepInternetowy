@@ -28,7 +28,7 @@ public class KategoriaDao {
     private String nazwa;
 
     public String getNazwa() {
-        session = helper.getSessionFactory().openSession();
+        session = HibernateUtil.getSessionFactory().openSession();
         session.beginTransaction();
         try {
             kategoria = (Kategoria) session.get(Kategoria.class, 2);
@@ -44,7 +44,7 @@ public class KategoriaDao {
     public void dodajKategoria() {
         kategoria = new Kategoria();
         kategoria.setNazwaKategorii("Komputer osobisty");
-        session = helper.getSessionFactory().openSession();
+        session = HibernateUtil.getSessionFactory().openSession();
         try {
             session.beginTransaction();
             session.save(kategoria);
