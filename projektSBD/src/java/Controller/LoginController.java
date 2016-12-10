@@ -24,16 +24,15 @@ public class LoginController {
 
     public String login, password;
 
-    public String validate() {
+    public void validate() {
         boolean valid = KlientDao.checkLogin(login, password);
         if (valid) {
             setCurrent(KlientDao.getKlient(login));
 
-            return "index";
-
+        } else {
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Zły login lub hasło"));
         }
-        FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Zły login lub hasło"));
-        return null;
+        // return null;
     }
 
     public String getLogin() {

@@ -1,0 +1,163 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
+
+
+    <h:head>
+
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <script src="resources/js/bootstrap.min.js" type="text/javascript"/>
+        <link href="resources/css/bootstrap.min.css" rel="stylesheet"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <title>Home</title>
+
+    </h:head>
+
+    <h:body>
+        <div class="jumbotron" style="margin-bottom: 0;">
+            <div class="container-fluid text-center">
+                <h1>Puch Puch Computers</h1>      
+                <p>Komputery i insza magia</p>
+            </div>
+        </div>
+        <div class="container">
+            <nav style="margin-bottom: 50px;border-radius:0;" class="navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>            
+                        </button>
+                        <h:link styleClass="navbar-brand" outcome="index.xhtml?faces-redirect=true"  value="Puch Puch Computers"></h:link>
+                    </div>
+                    <div class="collapse navbar-collapse" id="myNavbar">
+                        <ul class="nav navbar-nav">
+                            <li><h:link outcome="index.xhtml?faces-redirect=true"  value="Home"/></li>
+                            <li><h:link outcome="products.xhtml?faces-redirect=true"  value="Produkty"/></li>
+                            <li><h:link outcome="index.xhtml"  value="Kontakt"/></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+
+                            <li><h:link outcome="register.xhtml?faces-redirect=true"><span class="glyphicon glyphicon-user"></span> Zarejestruj się </h:link></li>
+                            <li><h:link outcome="login.xhtml?faces-redirect=true"><span class="glyphicon glyphicon-log-in"></span> Zaloguj się</h:link></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <div class="container" >
+            <div class="col-lg-4 col-md-2"></div>
+            <div class="col-lg-4 col-md-8 col-sm-12">
+                <h:form>
+                    <div class="form-group">
+                        <h:outputLabel value="Login:" for="login"/>
+                        <h:inputText required="true" alt="Login" value="#{registerController.customer.login}" id="login" styleClass="form-control"/>
+                        <h:message for="login"/>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Hasło:" for="pwd"/>
+                        <h:inputSecret required="true" value="#{registerController.customer.haslo}" id="pwd" styleClass="form-control"/>
+                        <h:message for="pwd"/>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Powtórz hasło:" for="repeatpwd"/>
+                        <h:inputSecret required="true" value="#{registerController.pass}" id="repeatpwd" styleClass="form-control"/>
+                        <h:message for="repeat"/>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Imię:" for="imie"/>
+                        <h:inputText required="true" value="#{registerController.customer.imie}" id="imie" styleClass="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Nazwisko:" for="nazwisko"/>
+                        <h:inputText required="true" value="#{registerController.customer.nazwisko}" id="nazwisko" styleClass="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel value="E-mail:" for="email"/>
+                        <h:inputText required="true" value="#{registerController.customer.EMail}" id="email" styleClass="form-control">
+                            <f:ajax render="emailMsg" event="change"/>
+                            <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]"/>
+                        </h:inputText>
+
+                        <h:message for="email" id="emailMsg" styleClass="form-control-static text-warning"/>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Nazwa firmy:" for="firma"/>
+                        <h:inputText value="#{registerController.customer.nazwaFirmy}" id="firma" styleClass="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Nr telefonu:" for="tel"/>
+                        <h:inputText value="#{registerController.customer.nrTelefonu}" id="tel" styleClass="form-control"/>
+                    </div>
+
+                    <h:outputLabel value="Adres" for="adresDiv"/>
+                    <hr id="adresDiv" class="divider" />
+
+                    <div class="form-group">
+                        <h:outputLabel value="Województwo:" for="woj"/>
+                        <h:inputText value="#{registerController.adres.wojewodztwo}" id="woj" styleClass="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Powiat:" for="powiat"/>
+                        <h:inputText value="#{registerController.adres.powiat}" id="powiat" styleClass="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Kod pocztowy:" for="kod"/>
+                        <h:inputText value="#{registerController.adres.kodPocztowy}" id="kod" styleClass="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Miejscowość:" for="miasto"/>
+                        <h:inputText value="#{registerController.adres.miejscowosc}" id="miasto" styleClass="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Ulica:" for="ulica"/>
+                        <h:inputText value="#{registerController.adres.ulica}" id="ulica" styleClass="form-control"/>
+                    </div>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Nr lokalu:" for="lokal"/>
+                        <h:inputText value="#{registerController.adres.nrLokalu}" id="lokal" styleClass="form-control"/>
+                    </div>
+
+
+                    <div class="container-fluid"><div class="col-lg-3"></div>
+                        <div class="col-lg-6">
+                            <h:commandButton id="registerBtn" styleClass="form-control btn-primary" value="Zarejestruj się" action="#{registerController.add()}"/>
+                        </div>
+                        <div class="col-lg-3"></div>
+                    </div>
+                </h:form>
+            </div>
+            <div class="col-lg-4 col-md-2"></div>
+        </div>
+
+
+
+        <footer class="footer" style="background-color: #f2f2f2;
+                padding: 10px; margin-top: 25px;">
+            <div class="container text-center">
+                <p style="margin-top: 10px">Puch Puch Computers Copyright<span class="glyphicon glyphicon-star"></span></p> 
+            </div>
+        </footer>
+
+
+    </h:body>
+
+</html>
+

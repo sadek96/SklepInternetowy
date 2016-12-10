@@ -24,16 +24,28 @@ public class registerController {
 
     private Klient customer = new Klient();
     private Adres adres = new Adres();
+    private String pass;
 
     public void add() {
-        if (KlientDao.isExist(customer.getLogin())) {
+        if (!KlientDao.isExist(customer.getLogin())) {
+
+            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Podany login już istnieje"));
+        }
+        if (customer.getHaslo().equals(pass)) {
             KlientDao.addKlient(customer);
             customer = KlientDao.getKlient(customer.getLogin());
             adres.setKlient(customer);
             AdresDao.addAdres(adres);
-        } else {
-            FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Podany login już istnieje"));
+
         }
+    }
+
+    public String getPass() {
+        return pass;
+    }
+
+    public void setPass(String pass) {
+        this.pass = pass;
     }
 
     public Klient getCustomer() {

@@ -5,54 +5,96 @@
  */
 package DAO;
 
-import javax.faces.bean.ManagedBean;
-import javax.faces.bean.RequestScoped;
-import javax.faces.bean.SessionScoped;
+import java.util.ArrayList;
+import java.util.List;
+
 import model.Kategoria;
-import org.hibernate.exception.ConstraintViolationException;
 
 import org.hibernate.Session;
+import org.hibernate.Transaction;
 import util.HibernateUtil;
 
 /**
  *
  * @author Daniel
  */
-@ManagedBean
-@SessionScoped
 public class KategoriaDao {
 
-    private Kategoria kategoria;
-    private HibernateUtil helper;
-    private Session session;
-    private String nazwa;
-
-    public String getNazwa() {
-        session = HibernateUtil.getSessionFactory().openSession();
-        session.beginTransaction();
+    
+    public void add(Kategoria kategoria) {
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        Transaction trns = null;
+        trns = session.beginTransaction();
         try {
-            kategoria = (Kategoria) session.get(Kategoria.class, 2);
-            this.nazwa = kategoria.getNazwaKategorii();
-        } catch (Exception e) {
-            this.nazwa = "NULL";
+            session.save(kategoria);
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            if (trns != null) {
+                trns.rollback();
+            }
+            e.printStackTrace();
         } finally {
-            return nazwa;
+            session.flush();
+            session.close();
         }
 
     }
 
-    public void dodajKategoria() {
-        kategoria = new Kategoria();
-        kategoria.setNazwaKategorii("Komputer osobisty");
-        session = HibernateUtil.getSessionFactory().openSession();
-        try {
-            session.beginTransaction();
-            session.save(kategoria);
-            session.getTransaction().commit();
-        } catch (ConstraintViolationException cve) {
 
+   
+
+    public void delete(int kategoriaId) {
+        Transaction trns = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+
+        try {
+            trns = session.beginTransaction();
+            Kategoria kat = (Kategoria) session.load(Kategoria.class, new Integer(kategoriaId));
+            session.delete(kat);
+            session.getTransaction().commit();
+        } catch (RuntimeException e) {
+            if (trns != null) {
+                trns.rollback();
+            }
+            e.printStackTrace();
+        } finally {
+            session.flush();
+            session.close();
         }
-        session.close();
+    }
+
+    public List<Kategoria> getAll() {
+        List<Kategoria> kategorie = new ArrayList<Kategoria>();
+        Transaction trns = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            trns = session.beginTransaction();
+            kategorie = session.createQuery("from Kategoria").list();
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        } finally {
+            session.flush();
+            session.close();
+        }
+
+        return kategorie;
+    }
+
+    public Kategoria getById(int id) {
+        Kategoria kategoria = null;
+        Transaction trns = null;
+        Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            trns = session.beginTransaction();
+            kategoria = (Kategoria) session.get(Kategoria.class, id);
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+        } finally {
+            session.flush();
+            session.close();
+        }
+
+        return kategoria;
     }
 
 }

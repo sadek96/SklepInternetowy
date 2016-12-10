@@ -1,0 +1,231 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets" xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
+
+
+    <h:head>
+
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <script src="resources/js/bootstrap.min.js" type="text/javascript"/>
+        <link href="resources/css/bootstrap.min.css" rel="stylesheet"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <title>Home</title>
+
+    </h:head>
+
+    <h:body>
+        <div class="jumbotron" style="margin-bottom: 0;">
+            <div class="container-fluid text-center">
+                <h1>Puch Puch Computers</h1>      
+                <p>Komputery i insza magia</p>
+            </div>
+        </div>
+        <div class="container">
+            <nav style="margin-bottom: 50px;border-radius:0;" class="navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>            
+                        </button>
+                        <h:link styleClass="navbar-brand" outcome="index.xhtml?faces-redirect=true"  value="Puch Puch Computers"></h:link>
+                    </div>
+                    <div class="collapse navbar-collapse" id="myNavbar">
+                        <ul class="nav navbar-nav">
+                            <li><h:link outcome="index.xhtml?faces-redirect=true"  value="Home"/></li>
+                            <li class="active"><h:link outcome="products.xhtml?faces-redirect=true"  value="Produkty"/></li>
+                            <li><h:link outcome="index.xhtml"  value="Kontakt"/></li>
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+
+                            <li><h:link outcome="register.xhtml?faces-redirect=true"><span class="glyphicon glyphicon-user"></span> Zarejestruj się </h:link></li>
+                            <li><h:link outcome="login.xhtml?faces-redirect=true"><span class="glyphicon glyphicon-log-in"></span> Zaloguj się</h:link></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <div class="container" ><h:form>
+                <div class="col-md-10 col-lg-9" >
+                    <div class="container-fluid row">
+                        <div class="col-lg-3">
+                            <h:selectOneMenu styleClass="btn" value="#{produktyController.nazwaKategorii}" onchange="this.form.submit()">
+                                <f:selectItem itemLabel="Wszystkie" itemValue="Wszystkie" />
+                                <f:selectItems value="#{produktyController.allKategorie}" var="kategoria" itemLabel="#{kategoria.nazwaKategorii}" itemValue="#{kategoria.nazwaKategorii}"/>
+                            </h:selectOneMenu>
+
+                        </div>
+
+
+
+
+                        <div class="col-lg-6 text-center">
+                            <ul class="pagination">
+                                <li><h:commandLink action="#{produktyController.previousPage()}"> <span class="glyphicon glyphicon-step-backward"/></h:commandLink></li>
+                                <c:forEach begin="${produktyController.startPage}" end="${produktyController.pageCount}" var="i">
+                                    <c:choose>
+                                        <c:when test="${produktyController.currentPage==i}">
+
+                                            <li class="active pull-left" ><h:commandLink action="#{produktyController.choosePage()}" value="${i}"><f:param name="page" value="#{i}"/></h:commandLink></li>
+                                        </c:when>
+                                        <c:when test="${produktyController.currentPage!=i}">
+                                            <li><h:commandLink action="#{produktyController.choosePage()}" value="${i}" ><f:param name="page" value="#{i}"/></h:commandLink></li>
+                                        </c:when>
+                                    </c:choose>
+                                </c:forEach>
+                                <li><h:commandLink action="#{produktyController.nextPage()}"> <span class="glyphicon glyphicon-step-forward"/></h:commandLink></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-3"></div>
+                    </div>
+
+
+                    <div class="container-fluid">    
+
+                        <div class="row">
+                            <c:forEach items="#{produktyController.currentPageProducts}" begin="0" end="2" var="produkt" varStatus="produktLoop">
+                                <div class="col-md-4">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading"><h:link style="color: white;" outcome="product.xhtml?faces-redirect=true">#{produkt.nazwa}<f:param name="produktId" value="#{produkt.idProdukt}"/> </h:link></div>
+                                        <div class="panel-body">
+                                            <c:set var="idProdukt" value="#{produkt.idProdukt}" />
+                                            <h:graphicImage styleClass="img-responsive" url="resources/images/#{produktyController.getProduktZdjecie(idProdukt).nazwaPliku}"/></div>
+                                        <div class="panel-footer" style="padding-top: 5px;padding-bottom: 5px;">
+                                            <div class="container-fluid">
+                                                <div class="pull-left">
+                                                    <h:outputText value="Cena: #{produkt.cenaBruttoAktualna}"/>
+                                                </div>
+                                                <div class="pull-right">
+                                                    <h:outputText value="Ilość: #{produkt.ilosc}"/>
+                                                    <h:commandLink action="#{koszykBean.addProdukt(produkt.idProdukt)}" class="btn-default">
+                                                        <span class="glyphicon glyphicon-shopping-cart">
+                                                            <span class="glyphicon glyphicon-plus"></span>
+                                                        </span>
+                                                    </h:commandLink>
+                                                </div>
+                                            </div>      
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </div>
+                        <div class="row">
+                            <c:forEach items="${produktyController.currentPageProducts}" begin="3" end="5" var="produkt2" varStatus="produktLoop">
+                                <div class="col-md-4">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading"><h:link style="color: white;" outcome="product.xhtml?faces-redirect=true">#{produkt2.nazwa}<f:param name="produktId" value="#{produkt2.idProdukt}"/> </h:link></div>
+                                        <div class="panel-body">
+                                            <c:set var="idProdukt2" value="${produkt2.idProdukt}" />
+                                            <h:graphicImage styleClass="img-responsive" url="resources/images/#{produktyController.getProduktZdjecie(idProdukt2).nazwaPliku}"/></div>
+                                        <div class="panel-footer" style="padding-top: 5px;padding-bottom: 5px;">
+                                            <div class="container-fluid">
+                                                <div class="pull-left">
+                                                    <h:outputText value="Cena: ${produkt2.cenaBruttoAktualna}"/>
+                                                </div>
+                                                <div class="pull-right">
+                                                    <h:outputText value="Ilość: ${produkt2.ilosc}"/>
+                                                    <h:commandLink action="#{koszykBean.addProdukt(produkt2.idProdukt)}" class="btn-default">
+                                                        <span class="glyphicon glyphicon-shopping-cart">
+                                                            <span class="glyphicon glyphicon-plus"></span>
+                                                        </span>
+                                                    </h:commandLink>
+                                                </div>
+                                            </div>      
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </div>
+                        <div class="row">
+                            <c:forEach items="${produktyController.currentPageProducts}" begin="6" end="8" var="produkt3" varStatus="produktLoop">
+                                <div class="col-md-4">
+                                    <div class="panel panel-primary">
+                                        <div class="panel-heading"><h:link style="color: white;" outcome="product.xhtml?faces-redirect=true">#{produkt3.nazwa}<f:param name="produktId" value="#{produkt3.idProdukt}"/> </h:link></div>
+                                        <div class="panel-body">
+                                            <c:set var="idProdukt3" value="${produkt3.idProdukt}" />
+                                            <h:graphicImage styleClass="img-responsive" url="resources/images/#{produktyController.getProduktZdjecie(idProdukt3).nazwaPliku}"/></div>
+                                        <div class="panel-footer" style="padding-top: 5px;padding-bottom: 5px;">
+                                            <div class="container-fluid">
+                                                <div class="pull-left">
+                                                    <h:outputText value="Cena: ${produkt3.cenaBruttoAktualna} "/>
+                                                </div>
+                                                <div class="pull-right">
+                                                    <h:outputText value="Ilość: ${produkt3.ilosc}"/>
+                                                    <h:commandLink action="#{koszykBean.addProdukt(produkt3.idProdukt)}" class="btn-default">
+                                                        <span class="glyphicon glyphicon-shopping-cart">
+                                                            <span class="glyphicon glyphicon-plus"></span>
+                                                        </span>
+                                                    </h:commandLink>
+                                                </div>
+                                            </div>      
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </div>
+
+
+                    </div><br/>
+
+
+
+                    <div class="container-fluid row">
+                        <div class="col-lg-3">
+
+                        </div>
+                        <div class="col-lg-6 text-center">
+                            <ul class="pagination">
+                                <li><h:commandLink action="${produktyController.previousPage()}"> <span class="glyphicon glyphicon-step-backward"/></h:commandLink></li>
+                                <c:forEach begin="${produktyController.startPage}" end="${produktyController.pageCount}" var="i">
+                                    <c:choose>
+                                        <c:when test="${produktyController.currentPage==i}">
+
+                                            <li class="active pull-left" ><h:commandLink action="#{produktyController.choosePage()}" value="${i}"><f:param name="page" value="#{i}"/></h:commandLink></li>
+                                        </c:when>
+                                        <c:when test="${produktyController.currentPage!=i}">
+                                            <li><h:commandLink action="#{produktyController.choosePage()}" value="${i}" ><f:param name="page" value="#{i}"/></h:commandLink></li>
+                                        </c:when>
+                                    </c:choose>
+                                </c:forEach>
+                                <li><h:commandLink action="#{produktyController.nextPage()}"> <span class="glyphicon glyphicon-step-forward"/></h:commandLink></li>
+                            </ul>
+                        </div>
+                        <div class="col-lg-3"></div>
+                    </div>
+
+                </div>
+
+
+                <div class="col-md-2 col-lg-3" >
+                    <div class="panel panel-default">
+                        <div class="panel-heading text-center">Twoje konto</div>
+                        <div class="panel-body text-center">
+                            <div class="row"><h:outputText value="W koszyku:"/></div>
+                            <div class="row"><h:outputText value="#{koszykBean.produktCount}"/></div>
+                            <div class="row"><h:outputText value="Łączna wartość:"/></div>
+                            <div class="row"><h:outputText value="#{koszykBean.totalValue}"/></div>
+                            <h:link styleClass="row" outcome="cart.xhtml?faces-redirect=true"><span class="glyphicon glyphicon-shopping-cart"></span> Koszyk</h:link>
+                        </div>
+                    </div>
+
+
+                </div>
+            </h:form>
+        </div>
+
+
+        <footer class="footer text-center" style="background-color: #f2f2f2;
+                padding: 10px; margin-top: 10px;">
+            <p>Puch Puch Computers Copyright<span class="glyphicon glyphicon-star"></span></p>  
+        </footer>
+
+
+    </h:body>
+
+</html>
+

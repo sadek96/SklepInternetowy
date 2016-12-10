@@ -21,5 +21,6 @@
     <mapping resource="model/Opinia.hbm.xml"/>
     <mapping resource="model/Faktura.hbm.xml"/>
     <mapping resource="model/ZamowienieProdukt.hbm.xml"/>
+    <mapping resource="model/Pracownik.hbm.xml"/>
   </session-factory>
 </hibernate-configuration>
