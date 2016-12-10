@@ -26,6 +26,7 @@ public class registerController {
     private Adres adres = new Adres();
     private String pass;
 
+    
     public void add() {
         if (!KlientDao.isExist(customer.getLogin())) {
 
