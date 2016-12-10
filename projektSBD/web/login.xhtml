@@ -8,12 +8,12 @@
     <h:body>
         <h:form>
             <h:outputText value="Login"/>
-            <h:inputText id="login" value="#{klient.login}"></h:inputText>
+            <h:inputText id="login" value="#{loginController.login}"></h:inputText>
             <br></br>
             <h:outputText value="Hasło"/>
-            <h:inputText id="password" value="#{klient.haslo}"></h:inputText>
+            <h:inputText id="password" value="#{loginController.password}"></h:inputText>
             <br></br>
-            <h:commandButton action="#{klient.validate()}" value="Zaloguj"></h:commandButton>
+            <h:commandButton action="#{loginController.validate()}" value="Zaloguj"></h:commandButton>
         </h:form>
     </h:body>
 </html>

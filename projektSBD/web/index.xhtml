@@ -5,14 +5,17 @@
       xmlns:c="http://xmlns.jcp.org/jsp/jstl/core">
     <h:head>
         <title>Kategoria</title>
+        <h:outputText value="#{loginController.current.login}"/>
     </h:head>
     <h:body>
 
 
-            <h:outputLabel value="#{kategoriaDao.nazwa}"/> 
+     
 
         <h:form>
+              
             <h:commandButton action="#{kategoriaDao.dodajKategoria()}" label="DodajKategorię"/>
+           
         </h:form>
     </h:body>
 </html>
