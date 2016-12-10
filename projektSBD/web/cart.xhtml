@@ -36,7 +36,7 @@
                     </div>
                     <div class="collapse navbar-collapse" id="myNavbar">
                         <ul class="nav navbar-nav">
-                            <li class="active"><h:link outcome="index.xhtml?faces-redirect=true"  value="Home"/></li>
+                            <li><h:link outcome="index.xhtml?faces-redirect=true"  value="Home"/></li>
                             <li><h:link outcome="products.xhtml?faces-redirect=true"  value="Produkty"/></li>
                             <li><h:link outcome="index.xhtml"  value="Kontakt"/></li>
                         </ul>
@@ -52,54 +52,29 @@
 
         <div class="container" >
             <div class="col-md-10 col-lg-9" >
-                <h:outputLabel styleClass="center-block text-center" value="Bestsellery"></h:outputLabel><br/>
+
                 <!-- TUTAJ JAKAŚ ZAWARTOŚĆ NP. LISTA PRODUKTÓW ALBO FORM  -->
-                <div class="container-fluid">    
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="panel panel-primary">
-                                <div class="panel-heading">ASUS_K501LX-DM076H</div>
-                                <div class="panel-body"><h:graphicImage styleClass="img-responsive" url="resources/images/ASUS_K501LX-DM076H.jpg"/></div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4"> 
-                            <div class="panel panel-primary">
-                                <div class="panel-heading">ASUS_X540LJ-XX002T</div>
-                                <div class="panel-body"><h:graphicImage styleClass="img-responsive" url="resources/images/ASUS_X540LJ-XX002T.jpg"/></div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4"> 
-                            <div class="panel panel-primary">
-                                <div class="panel-heading">HP_Omen_15-ax054nw</div>
-                                <div class="panel-body"><h:graphicImage styleClass="img-responsive" url="resources/images/HP_Omen_15-ax054nw.jpg"/></div>
-                            </div>
-                        </div>
-                    </div>
-                </div><br/>
+                <h:form>
+                    <h:dataTable value="#{koszykBean.produkty}" var="produktZam" class="table table-responsive table-bordered table-striped">
 
-                <div class="container-fluid">    
-                    <div class="row">
-                        <div class="col-lg-4">
-                            <div class="panel panel-primary">
-                                <div class="panel-heading">Lenovo_Essential_G50-45</div>
-                                <div class="panel-body"><h:graphicImage styleClass="img-responsive" url="resources/images/Lenovo_Essential_G50-45.jpg"/></div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4"> 
-                            <div class="panel panel-primary">
-                                <div class="panel-heading">Lenovo_IdeaPad_310-15ISK</div>
-                                <div class="panel-body"><h:graphicImage styleClass="img-responsive" url="resources/images/Lenovo_IdeaPad_310-15ISK.jpg"/></div>
-                            </div>
-                        </div>
-                        <div class="col-lg-4"> 
-                            <div class="panel panel-primary">
-                                <div class="panel-heading">Lenovo_IdeaPad_700-15ISK</div>
-                                <div class="panel-body"><h:graphicImage styleClass="img-responsive" url="resources/images/Lenovo_IdeaPad_700-15ISK.jpg"/></div>
-                            </div>
-                        </div>
-                    </div>
-                </div><br/>
+                        <h:column><f:facet name="header">Nazwa</f:facet>
+                                #{produktZam.produkt.nazwa}
+                        </h:column>
+                        <h:column><f:facet name="header">Ilość</f:facet>
+                            <h:commandLink styleClass="btn-default" action="#{koszykBean.decrementProduktCount(produktZam.produkt.idProdukt)}"><span class="glyphicon glyphicon-minus"></span></h:commandLink>
+                                #{produktZam.iloscProduktu}
+                            <h:commandLink styleClass="btn-default" action="#{koszykBean.incrementProduktCount(produktZam.produkt.idProdukt)}"><span class="glyphicon glyphicon-plus"></span></h:commandLink>
+                        </h:column>
+                        <h:column><f:facet name="header">Wartość</f:facet>
+                                #{produktZam.iloscProduktu*produktZam.produkt.cenaBruttoAktualna}
+                        </h:column>
+                        <h:column><f:facet name="header">Usuń</f:facet>
+                            <h:commandLink action="#{koszykBean.removeProdukt(produktZam.produkt.idProdukt)}" styleClass="btn-default"><span class="glyphicon glyphicon-trash"></span></h:commandLink>
+                        </h:column>
+                    </h:dataTable>
 
+                   
+                </h:form>
             </div>
             <div class="col-md-2 col-lg-3" >
                 <div class="panel panel-default">
@@ -119,9 +94,9 @@
 
 
 
-        <footer class="footer text-center" style="background-color: #f2f2f2;
-                padding: 10px;">
-            <p style="padding-top:10px;">Puch Puch Computers Copyright<span class="glyphicon glyphicon-star"></span></p>  
+        <footer class="footer navbar-fixed-bottom text-center" style="background-color: #f2f2f2;
+                padding: 25px;">
+            <p>Puch Puch Computers Copyright<span class="glyphicon glyphicon-star"></span></p>  
         </footer>
 
 

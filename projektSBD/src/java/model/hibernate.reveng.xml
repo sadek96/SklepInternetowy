@@ -16,4 +16,5 @@
   <table-filter match-name="kategoria_producent"/>
   <table-filter match-name="produkt"/>
   <table-filter match-name="kategoria"/>
+  <table-filter match-name="pracownik"/>
 </hibernate-reverse-engineering>
