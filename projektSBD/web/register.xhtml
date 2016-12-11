@@ -38,12 +38,17 @@
                         <ul class="nav navbar-nav">
                             <li><h:link outcome="index.xhtml?faces-redirect=true"  value="Home"/></li>
                             <li><h:link outcome="products.xhtml?faces-redirect=true"  value="Produkty"/></li>
-                            <li><h:link outcome="index.xhtml"  value="Kontakt"/></li>
+
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
 
-                            <li><h:link outcome="register.xhtml?faces-redirect=true"><span class="glyphicon glyphicon-user"></span> Zarejestruj się </h:link></li>
-                            <li><h:link outcome="login.xhtml?faces-redirect=true"><span class="glyphicon glyphicon-log-in"></span> Zaloguj się</h:link></li>
+                            <h:panelGroup rendered="#{!loginBean.loggedIn}">
+                                <li><h:link styleClass="active" outcome="register.xhtml?faces-redirect=true"><span class="glyphicon glyphicon-user"></span> Zarejestruj się </h:link></li>
+                                <li><h:link outcome="login.xhtml?faces-redirect=true"><span class="glyphicon glyphicon-log-in"></span> Zaloguj się</h:link></li></h:panelGroup>
+                            <h:panelGroup rendered="#{loginBean.loggedIn}"><li><h:link>Witaj #{loginBean.klient.login}!</h:link></li>
+                                <li><h:form>
+                                    <h:commandLink styleClass="text-center" action="#{loginBean.logout()}">Wyloguj</h:commandLink>
+                                </h:form></li></h:panelGroup>
                         </ul>
                     </div>
                 </div>
