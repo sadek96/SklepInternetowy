@@ -13,6 +13,7 @@ import model.Zdjecie;
 import org.hibernate.Query;
 import org.hibernate.Session;
 import org.hibernate.Transaction;
+import org.hibernate.exception.ConstraintViolationException;
 import util.HibernateUtil;
 
 /**
@@ -134,5 +135,15 @@ public class ProduktDao {
         return zdjecia;
     }
 
-    
+    public void addProdukt(Produkt p){
+     Session session = HibernateUtil.getSessionFactory().openSession();
+        try {
+            session.beginTransaction();
+            session.save(p);
+            session.getTransaction().commit();
+        } catch (ConstraintViolationException e) {
+        } finally {
+            session.close();
+        }
+    }
 }
