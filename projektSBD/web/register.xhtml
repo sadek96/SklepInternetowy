@@ -56,35 +56,35 @@
                 <h:form>
                     <div class="form-group">
                         <h:outputLabel value="Login:" for="login"/>
-                        <h:inputText required="true" alt="Login" value="#{registerController.customer.login}" id="login" styleClass="form-control"/>
+                        <h:inputText required="true" alt="Login" value="#{registerControll.customer.login}" id="login" styleClass="form-control"/>
                         <h:message for="login"/>
                     </div>
 
                     <div class="form-group">
                         <h:outputLabel value="Hasło:" for="pwd"/>
-                        <h:inputSecret required="true" value="#{registerController.customer.haslo}" id="pwd" styleClass="form-control"/>
+                        <h:inputSecret required="true" value="#{registerControll.customer.haslo}" id="pwd" styleClass="form-control"/>
                         <h:message for="pwd"/>
                     </div>
 
                     <div class="form-group">
                         <h:outputLabel value="Powtórz hasło:" for="repeatpwd"/>
-                        <h:inputSecret required="true" value="#{registerController.pass}" id="repeatpwd" styleClass="form-control"/>
+                        <h:inputSecret required="true" value="#{registerControll.pass}" id="repeatpwd" styleClass="form-control"/>
                         <h:message for="repeat"/>
                     </div>
 
                     <div class="form-group">
                         <h:outputLabel value="Imię:" for="imie"/>
-                        <h:inputText required="true" value="#{registerController.customer.imie}" id="imie" styleClass="form-control"/>
+                        <h:inputText required="true" value="#{registerControll.customer.imie}" id="imie" styleClass="form-control"/>
                     </div>
 
                     <div class="form-group">
                         <h:outputLabel value="Nazwisko:" for="nazwisko"/>
-                        <h:inputText required="true" value="#{registerController.customer.nazwisko}" id="nazwisko" styleClass="form-control"/>
+                        <h:inputText required="true" value="#{registerControll.customer.nazwisko}" id="nazwisko" styleClass="form-control"/>
                     </div>
 
                     <div class="form-group">
                         <h:outputLabel value="E-mail:" for="email"/>
-                        <h:inputText required="true" value="#{registerController.customer.EMail}" id="email" styleClass="form-control">
+                        <h:inputText required="true" value="#{registerControll.customer.EMail}" id="email" styleClass="form-control">
                             <f:ajax render="emailMsg" event="change"/>
                             <f:validateRegex pattern="[\w\.-]*[a-zA-Z0-9_]@[\w\.-]*[a-zA-Z0-9]\.[a-zA-Z][a-zA-Z\.]*[a-zA-Z]"/>
                         </h:inputText>
@@ -94,12 +94,12 @@
 
                     <div class="form-group">
                         <h:outputLabel value="Nazwa firmy:" for="firma"/>
-                        <h:inputText value="#{registerController.customer.nazwaFirmy}" id="firma" styleClass="form-control"/>
+                        <h:inputText value="#{registerControll.customer.nazwaFirmy}" id="firma" styleClass="form-control"/>
                     </div>
 
                     <div class="form-group">
                         <h:outputLabel value="Nr telefonu:" for="tel"/>
-                        <h:inputText value="#{registerController.customer.nrTelefonu}" id="tel" styleClass="form-control"/>
+                        <h:inputText value="#{registerControll.customer.nrTelefonu}" id="tel" styleClass="form-control"/>
                     </div>
 
                     <h:outputLabel value="Adres" for="adresDiv"/>
@@ -107,38 +107,38 @@
 
                     <div class="form-group">
                         <h:outputLabel value="Województwo:" for="woj"/>
-                        <h:inputText value="#{registerController.adres.wojewodztwo}" id="woj" styleClass="form-control"/>
+                        <h:inputText value="#{registerControll.adres.wojewodztwo}" id="woj" styleClass="form-control"/>
                     </div>
 
                     <div class="form-group">
                         <h:outputLabel value="Powiat:" for="powiat"/>
-                        <h:inputText value="#{registerController.adres.powiat}" id="powiat" styleClass="form-control"/>
+                        <h:inputText value="#{registerControll.adres.powiat}" id="powiat" styleClass="form-control"/>
                     </div>
 
                     <div class="form-group">
                         <h:outputLabel value="Kod pocztowy:" for="kod"/>
-                        <h:inputText value="#{registerController.adres.kodPocztowy}" id="kod" styleClass="form-control"/>
+                        <h:inputText value="#{registerControll.adres.kodPocztowy}" id="kod" styleClass="form-control"/>
                     </div>
 
                     <div class="form-group">
                         <h:outputLabel value="Miejscowość:" for="miasto"/>
-                        <h:inputText value="#{registerController.adres.miejscowosc}" id="miasto" styleClass="form-control"/>
+                        <h:inputText value="#{registerControll.adres.miejscowosc}" id="miasto" styleClass="form-control"/>
                     </div>
 
                     <div class="form-group">
                         <h:outputLabel value="Ulica:" for="ulica"/>
-                        <h:inputText value="#{registerController.adres.ulica}" id="ulica" styleClass="form-control"/>
+                        <h:inputText value="#{registerControll.adres.ulica}" id="ulica" styleClass="form-control"/>
                     </div>
 
                     <div class="form-group">
                         <h:outputLabel value="Nr lokalu:" for="lokal"/>
-                        <h:inputText value="#{registerController.adres.nrLokalu}" id="lokal" styleClass="form-control"/>
+                        <h:inputText value="#{registerControll.adres.nrLokalu}" id="lokal" styleClass="form-control"/>
                     </div>
 
 
                     <div class="container-fluid"><div class="col-lg-3"></div>
                         <div class="col-lg-6">
-                            <h:commandButton id="registerBtn" styleClass="form-control btn-primary" value="Zarejestruj się" action="#{registerController.add()}"/>
+                            <h:commandButton id="registerBtn" styleClass="form-control btn-primary" value="Zarejestruj się" action="#{registerControll.add()}"/>
                         </div>
                         <div class="col-lg-3"></div>
                     </div>
