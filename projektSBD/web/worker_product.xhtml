@@ -1,12 +1,125 @@
 <?xml version='1.0' encoding='UTF-8' ?>
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
-      xmlns:h="http://xmlns.jcp.org/jsf/html">
+      xmlns:h="http://java.sun.com/jsf/html"
+      xmlns:f="http://java.sun.com/jsf/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-        <title>Facelet Title</title>
+        <meta charset="utf-8"/>
+        <meta name="viewport" content="width=device-width, initial-scale=1"/>
+        <script src="resources/js/bootstrap.min.js" type="text/javascript"/>
+        <link href="resources/css/bootstrap.min.css" rel="stylesheet"/>
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+        <title>Worker_product</title>
     </h:head>
     <h:body>
-        
+        <div class="jumbotron" style="margin-bottom: 0;">
+            <div class="container-fluid text-center">
+                <h1>Puch Puch Computers</h1>      
+                <p>Komputery i insza magia</p>
+            </div>
+        </div>
+        <div class="container">
+            <nav style="margin-bottom: 50px;border-radius:0;" class="navbar-inverse">
+                <div class="container-fluid">
+                    <div class="navbar-header">
+                        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>
+                            <span class="icon-bar"></span>            
+                        </button>
+
+                    </div>
+                    <div class="collapse navbar-collapse" id="myNavbar">
+                        <ul class="nav navbar-nav">
+                            <li><h:link outcome="worker_orders.xhtml?faces-redirect=true"  value="Zamówienia"/></li>
+                            <li><h:link outcome="worker_product.xhtml?faces-redirect=true"  value="Produkty"/></li>
+
+                        </ul>
+                        <ul class="nav navbar-nav navbar-right">
+
+                            <li><h:link outcome="register.xhtml?faces-redirect=true"><span class="glyphicon glyphicon-user"></span> Zarejestruj się </h:link></li>
+                            <li><h:link outcome="login.xhtml?faces-redirect=true"><span class="glyphicon glyphicon-log-in"></span> Zaloguj się</h:link></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </div>
+
+        <div class="container">
+            <div class="col-lg-4 col-md-2"></div>
+            <div class="col-lg-4 col-md-8 col-sm-12">
+                <h:form>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Producent:" for="producent"/>
+                        <br></br>
+                        <h:selectOneMenu value="#{workerController.producent}">
+                            <f:selectItems value="#{workerController.all}"/>
+                        </h:selectOneMenu>><br></br>
+                        <h:message for="producent"/>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Kategoria:" for="kategoria"/>
+                        <br></br>
+                        <h:selectOneMenu value="#{workerController.kategoria}">
+                            <f:selectItems value="#{workerController.category}"/>
+                        </h:selectOneMenu><br></br>
+                        <h:message for="kategoria"/>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Nazwa produktu:" for="nazwa"/>
+                        <h:inputText alt="nazwa" value="#{workerController.nazwa}" id="nazwa" styleClass="form-control"/>
+                        <h:message for="nazwa"/>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Opis:" for="opis"/>
+                        <h:inputTextarea  value="#{workerController.opis}" id="opis" styleClass="form-control" />
+                        <h:message for="opis"/>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Cena netto:" for="cena"/>
+                        <h:inputText alt="cena" value="#{workerController.cenaN}" id="cena" styleClass="form-control"/>
+                        <h:message for="cena"/>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Cena brutto:" for="cenab"/>
+                        <h:inputText alt="cenab" value="#{workerController.cenaB}" id="cenab" styleClass="form-control"/>
+                        <h:message for="cenab"/>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Vat:" for="vat"/>
+                        <h:inputText alt="vat" value="#{workerController.vat}" id="vat" styleClass="form-control"/>
+                        <h:message for="vat"/>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Ilość:" for="cena"/>
+                        <h:inputText alt="ilosc" value="#{workerController.ilosc}" id="ilosc" styleClass="form-control"/>
+                        <h:message for="ilosc"/>
+                    </div>
+                    
+                    
+                    <div class="container-fluid"><div class="col-lg-3"></div>
+                        <div class="col-lg-6">
+                            <h:commandButton id="loginBtn" styleClass="form-control btn-primary" value="Dodaj" action="#{workerController.add()}"/>
+                        </div>
+                        <div class="col-lg-3"></div>
+                    </div>
+                    
+                    <br></br><br></br><br></br> <br></br><br></br><br></br> <br></br><br></br><br></br>
+                </h:form>
+            </div>
+            <div class="col-lg-4 col-md-2"></div>
+        </div>
+
+
+
+        <footer class="footer navbar-fixed-bottom" style="background-color: #f2f2f2;
+                padding: 10px; margin-top: 10px;">
+            <div class="container text-center">
+                <p style="margin-top: 10px">Puch Puch Computers Copyright<span class="glyphicon glyphicon-star"></span></p> 
+            </div>
+        </footer>
     </h:body>
 </html>
 

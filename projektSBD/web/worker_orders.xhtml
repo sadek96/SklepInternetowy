@@ -1,21 +1,17 @@
-<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
-
-
     <h:head>
-
-        <meta charset="utf-8"/>
+         <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <script src="resources/js/bootstrap.min.js" type="text/javascript"/>
         <link href="resources/css/bootstrap.min.css" rel="stylesheet"/>
         <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
-        <title>Home</title>
-
+        <title>Worker_orders</title>
     </h:head>
-
     <h:body>
         <div class="jumbotron" style="margin-bottom: 0;">
             <div class="container-fluid text-center">
@@ -23,7 +19,7 @@
                 <p>Komputery i insza magia</p>
             </div>
         </div>
-        <div class="container">
+         <div class="container">
             <nav style="margin-bottom: 50px;border-radius:0;" class="navbar-inverse">
                 <div class="container-fluid">
                     <div class="navbar-header">
@@ -32,13 +28,13 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>            
                         </button>
-                        <h:link styleClass="navbar-brand" outcome="index.xhtml?faces-redirect=true"  value="Puch Puch Computers"></h:link>
+                      
                     </div>
                     <div class="collapse navbar-collapse" id="myNavbar">
                         <ul class="nav navbar-nav">
-                            <li><h:link outcome="index.xhtml?faces-redirect=true"  value="Home"/></li>
-                            <li><h:link outcome="products.xhtml?faces-redirect=true"  value="Produkty"/></li>
-                            <li><h:link outcome="index.xhtml"  value="Kontakt"/></li>
+                            <li><h:link outcome="worker_orders.xhtml?faces-redirect=true"  value="Zamówienia"/></li>
+                            <li><h:link outcome="worker_product.xhtml?faces-redirect=true"  value="Produkty"/></li>
+                            
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
 
@@ -49,45 +45,14 @@
                 </div>
             </nav>
         </div>
-
-        <div class="container">
-            <div class="col-lg-4 col-md-2"></div>
-            <div class="col-lg-4 col-md-8 col-sm-12">
-                <h:form>
-                    <div class="form-group">
-                        <h:outputLabel value="Login:" for="login"/>
-                        <h:inputText alt="Login" value="#{loginControll.login}" id="login" styleClass="form-control"/>
-                        <h:message for="login"/>
-                    </div>
-
-                    <div class="form-group">
-                        <h:outputLabel value="Hasło:" for="pwd"/>
-                        <h:inputSecret value="#{loginControll.password}" id="pwd" styleClass="form-control"/>
-                        <h:message for="pwd"/>
-                    </div>
-
-                    <div class="container-fluid"><div class="col-lg-3"></div>
-                        <div class="col-lg-6">
-                            <h:commandButton id="loginBtn" styleClass="form-control btn-primary" value="Zaloguj" action="#{loginControll.validate()}"/>
-                        </div>
-                        <div class="col-lg-3"></div>
-                    </div>
-                </h:form>
-            </div>
-            <div class="col-lg-4 col-md-2"></div>
-        </div>
-
         
-
+        
         <footer class="footer navbar-fixed-bottom" style="background-color: #f2f2f2;
                 padding: 10px; margin-top: 10px;">
             <div class="container text-center">
                 <p style="margin-top: 10px">Puch Puch Computers Copyright<span class="glyphicon glyphicon-star"></span></p> 
             </div>
         </footer>
-
-
     </h:body>
-
 </html>
 
