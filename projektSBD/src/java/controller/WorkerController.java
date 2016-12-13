@@ -9,6 +9,7 @@ import DAO.KategoriaDao;
 import DAO.KategoriaProducentDao;
 import DAO.ProducentDao;
 import DAO.ProduktDao;
+import DAO.ZamowienieDao;
 import java.util.ArrayList;
 import java.util.List;
 import javax.faces.application.FacesMessage;
@@ -29,8 +30,9 @@ import model.Produkt;
 public class WorkerController {
 
     private String producent;
-    private String kategoria;
-
+    private String kategoria, stan;
+    private int idzamowienia;
+    private ZamowienieDao zamowienieDao = new ZamowienieDao();
     private Kategoria category;
     private Producent producentP;
     private ProducentDao producentDao = new ProducentDao();
@@ -65,6 +67,10 @@ public class WorkerController {
         return list;
     }
 
+    public void update() {
+        zamowienieDao.editStatus(stan, idzamowienia);
+    }
+
     public void add() {
         Produkt p = new Produkt();
         p.setIlosc(ilosc);
@@ -78,12 +84,28 @@ public class WorkerController {
         kategoriaProducent.setKategoria(k);
 
         kategoriaProducent.setProducent(producentp);
-        if(kategoriaProducentDao.getKP(kategoriaProducent.getProducent().getIdProducent(), kategoriaProducent.getKategoria().getIdKategoria())==null){
-        kategoriaProducentDao.addKategoriaProducent(kategoriaProducent);
-        kategoriaProducent = kategoriaProducentDao.getKP(kategoriaProducent.getProducent().getIdProducent(), kategoriaProducent.getKategoria().getIdKategoria());
-    }
+        if (kategoriaProducentDao.getKP(kategoriaProducent.getProducent().getIdProducent(), kategoriaProducent.getKategoria().getIdKategoria()) == null) {
+            kategoriaProducentDao.addKategoriaProducent(kategoriaProducent);
+            kategoriaProducent = kategoriaProducentDao.getKP(kategoriaProducent.getProducent().getIdProducent(), kategoriaProducent.getKategoria().getIdKategoria());
+        }
         p.setKategoriaProducent(kategoriaProducent);
         produktDao.addProdukt(p);
+    }
+
+    public int getIdzamowienia() {
+        return idzamowienia;
+    }
+
+    public void setIdzamowienia(int idzamowienia) {
+        this.idzamowienia = idzamowienia;
+    }
+
+    public String getStan() {
+        return stan;
+    }
+
+    public void setStan(String stan) {
+        this.stan = stan;
     }
 
     public String getProducent() {

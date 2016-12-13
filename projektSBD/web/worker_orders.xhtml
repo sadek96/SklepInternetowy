@@ -5,7 +5,7 @@
       xmlns:f="http://java.sun.com/jsf/core"
       xmlns:ui="http://java.sun.com/jsf/facelets">
     <h:head>
-         <meta charset="utf-8"/>
+        <meta charset="utf-8"/>
         <meta name="viewport" content="width=device-width, initial-scale=1"/>
         <script src="resources/js/bootstrap.min.js" type="text/javascript"/>
         <link href="resources/css/bootstrap.min.css" rel="stylesheet"/>
@@ -19,7 +19,7 @@
                 <p>Komputery i insza magia</p>
             </div>
         </div>
-         <div class="container">
+        <div class="container">
             <nav style="margin-bottom: 50px;border-radius:0;" class="navbar-inverse">
                 <div class="container-fluid">
                     <div class="navbar-header">
@@ -28,13 +28,13 @@
                             <span class="icon-bar"></span>
                             <span class="icon-bar"></span>            
                         </button>
-                      
+
                     </div>
                     <div class="collapse navbar-collapse" id="myNavbar">
                         <ul class="nav navbar-nav">
                             <li><h:link outcome="worker_orders.xhtml?faces-redirect=true"  value="Zamówienia"/></li>
                             <li><h:link outcome="worker_product.xhtml?faces-redirect=true"  value="Produkty"/></li>
-                            
+
                         </ul>
                         <ul class="nav navbar-nav navbar-right">
 
@@ -45,8 +45,38 @@
                 </div>
             </nav>
         </div>
-        
-        
+
+        <div class="container">
+            <div class="col-lg-4 col-md-2"></div>
+            <div class="col-lg-4 col-md-8 col-sm-12">
+                <h:form>
+
+                    <div class="form-group">
+                        <h:outputLabel value="Numer zamówienia:" for="nazwa"/>
+                        <h:inputText alt="nazwa" value="#{workerController.idzamowienia}" id="nazwa" styleClass="form-control"/>
+                        <h:message for="nazwa"/>
+                    </div>
+                    <div class="form-group">
+                        <h:outputLabel value="Status zamówienia:" for="producent"/>
+                        <br></br>
+                        <h:selectOneMenu value="#{workerController.stan}">
+                            <f:selectItem  itemLabel="W realizacji" itemValue="W realizacji"/>
+                            <f:selectItem  itemLabel="Wysłano" itemValue="Wysłano"/>
+                            <f:selectItem  itemLabel="Zrealizowano" itemValue="Zrealizowano"/>
+
+                        </h:selectOneMenu>><br></br>
+                        <h:message for="producent"/>
+                        <div class="container-fluid"><div class="col-lg-3"></div>
+                        <div class="col-lg-6">
+                            <h:commandButton id="loginBtn" styleClass="form-control btn-primary" value="Zmień status" action="#{workerController.update()}"/>
+                        </div>
+                        <div class="col-lg-3"></div>
+                    </div>
+                    </div>
+                </h:form>
+            </div>
+            <div class="col-lg-4 col-md-2"></div>
+        </div>
         <footer class="footer navbar-fixed-bottom" style="background-color: #f2f2f2;
                 padding: 10px; margin-top: 10px;">
             <div class="container text-center">
