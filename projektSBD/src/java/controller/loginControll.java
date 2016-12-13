@@ -21,6 +21,7 @@ import model.Pracownik;
 @ManagedBean
 @SessionScoped
 public class loginControll {
+
     private Klient current = new Klient();
     private Pracownik worker = new Pracownik();
     private KlientDao klientDao = new KlientDao();
@@ -28,12 +29,12 @@ public class loginControll {
 
     public String login, password;
 
-    public void validate() {
+    public String validate() {
         boolean valid = klientDao.checkLogin(login, password);
         if (valid) {
             setCurrent(klientDao.getKlient(login));
             FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("WORKER " + current.getLogin()));
-
+          return  user();
         } else {
 
             // return null;
@@ -42,14 +43,23 @@ public class loginControll {
 
                 if (valid) {
                     worker = pracownikDao.getWorker(login);
-                    FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("WORKER " + worker.getLogin()));
-
+                    //  FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("WORKER " + worker.getLogin()));
+                  return  worker();
                 } else {
                     FacesContext.getCurrentInstance().addMessage(null, new FacesMessage("Zły login lub hasło"));
+                    return "login.xhtml?faces-redirect=true";
                 }
 
             }
-        }
+        }return "login.xhtml?faces-redirect=true";
+    }
+
+    String user() {
+        return "index.xhtml?faces-redirect=true";
+    }
+
+    String worker() {
+        return "worker_product.xhtml?faces-redirect=true";
     }
 
     public String getLogin() {
